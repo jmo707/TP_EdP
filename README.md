@@ -6,7 +6,7 @@ Tecnicatura Universitaria en Inteligencia Artificial
 
 Docentes: Juan Pablo Michelino, Luciano Barletta, Luciano Anselmino.
 
-###TRABAJO FINAL###
+#TRABAJO FINAL
 
 
 
