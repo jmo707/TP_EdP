@@ -3,6 +3,8 @@
 
 sleep 1s
 
+echo "statsWords devuelve valores respecto de PALABRAS analizando un archivo de texto."
+sleep 1s
 echo -e "\nstatsWords a determinado 4 valores estadísticos:\n"
 
 word_count()
