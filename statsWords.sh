@@ -28,7 +28,7 @@ shortest_word()
     while read -r word
     do
         linelength=${#word}
-        if [ ${#linelength} -lt ${#shortest} ];
+        if [ ${#linelength} -lt ${#shortest} ]
         then
         shortest=${#word}
         fi
@@ -44,7 +44,7 @@ longest_word()
     while read -r word
     do
         linelength=${#word}
-        if [ ${#linelength} -gt ${#longest} ];
+        if [ ${#linelength} -gt ${#longest} ]
         then
         longest=${#word}
         fi
