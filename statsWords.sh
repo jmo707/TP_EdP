@@ -1,53 +1,61 @@
 #!/usr/bin/env bash
 ## Indicador estadístico de longitud de palabras (la más corta, la más larga y el promedio de longitud).
 
-INPUT=
+sleep 1s
 
-word_count(){
-    local wc_return=$(wc -w < INPUT)
-    echo wc_return
+echo -e "\nstatsWords a determinado 4 valores estadísticos:\n"
+
+word_count()
+{
+    declare -i wc_return
+    wc_return=$(wc -w < $1)
+    echo -n "[$wc_return]"
 }
 
-word_count_average(){
-    wca_return=$((wc -m < INPUT / wc -w < INPUT)) # ¿Convendría utilizar wc_return?
-    echo wca_return
+word_count_average()
+{
+    declare -i wca_return
+    dividendo=$(wc -m  < "$1")
+    divisor=$(wc -w < "$1")
+    wca_return=$((dividendo / divisor))
+    echo -n "[$wca_return]"
 }
 
-shortest_word(){
+shortest_word()
+{
     shortest=100
 
-    while read line
+    while read -r word
     do
-    linelength=${#line}
-    if [ $linelength -lt $shortest ];
-    then
-        shortest=$line
-    fi
-done
+        linelength=${#word}
+        if [ ${#linelength} -lt ${#shortest} ];
+        then
+        shortest=${#word}
+        fi
+    done < "$1"
 
-echo $shortest
+echo -n "[$shortest]"
 }
 
-longest_word(){
+longest_word()
+{
     longest=0
 
-    shortest=100
-
-    while read line
+    while read -r word
     do
-    linelength=${#line}
-    if [ $linelength -lt $longest ];
-    then
-        longest=$line
-    fi
-done
+        linelength=${#word}
+        if [ ${#linelength} -gt ${#longest} ];
+        then
+        longest=${#word}
+        fi
+    done < "$1"
 
-echo $longest
+echo -n "[$longest]"
 }
 
-echo "La cantidad de palabras en el documento es: $wc_return"
-echo "La palabra más corta es: $sw_return"
-echo "La palabra más larga es: $lw_return"
-echo "El promedio de caractéres de todas las palabras es: $wca_return"
+word_count "$@" && echo " es la cantidad de palabras."
+shortest_word "$@" && echo " es la cantidad de letras de la palabra más corta."
+longest_word "$@" && echo " es la cantidad de letras de la palabra más larga."
+word_count_average "$@" && echo " es la cantidad promedio de letras por palabra en el documento."
 
 
